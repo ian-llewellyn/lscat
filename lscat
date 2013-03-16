@@ -2,17 +2,42 @@
 
 work() {
     if [ -d "$1" ] ; then
-        $LS_EXEC --color=auto "$1"
+        $DIR_EXEC --color=auto "$1"
     else
-        cat "$1"
+        $FILE_EXEC "$1"
     fi
 }
 
-if [ "$(basename "$0")" == "lscat" ]; then
-    LS_EXEC=ls
-else
-    LS_EXEC='ls -l'
-fi
+case "$(basename "$0")" in
+"lscat")
+    DIR_EXEC='ls --color=auto'
+    FILE_EXEC='cat'
+    ;;
+"llcat")
+    DIR_EXEC='ls -l --color=auto'
+    FILE_EXEC='cat'
+    ;;
+"lsvim")
+    DIR_EXEC='ls --color=auto'
+    FILE_EXEC='vim'
+    ;;
+"llvim")
+    DIR_EXEC='ls -l --color=auto'
+    FILE_EXEC='vim'
+    ;;
+"lsvimr")
+    DIR_EXEC='ls --color=auto'
+    FILE_EXEC='vim -R'
+    ;;
+"llvimr")
+    DIR_EXEC='ls -l --color=auto'
+    FILE_EXEC='vim -R'
+    ;;
+*)
+    # My favourite is this combo:
+    DIR_EXEC='ls -l --color=auto'
+    FILE_EXEC='vim'
+esac
 
 if [ $# -gt 1 ] ; then
     for i in "$@" ; do
