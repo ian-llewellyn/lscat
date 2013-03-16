@@ -1,0 +1,25 @@
+#!/bin/bash
+
+work() {
+    if [ -d "$1" ] ; then
+        $LS_EXEC --color=auto "$1"
+    else
+        cat "$1"
+    fi
+}
+
+if [ "$(basename "$0")" == "lscat" ]; then
+    LS_EXEC=ls
+else
+    LS_EXEC='ls -l'
+fi
+
+if [ $# -gt 1 ] ; then
+    for i in "$@" ; do
+        echo $i:
+        work "$i"
+        echo
+    done
+else
+    work "$1"
+fi

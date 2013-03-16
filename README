@@ -1,0 +1,12 @@
+lscat
+=====
+
+Have you ever been exploring a filesystem and found yourself repeatedly
+pressing Up to recall the last command, an 'ls -l' for example, to append the
+name of a file you're interested in. Then you have to go to the start of the
+line to change the ls -l to cat just to see the contents of that file?
+
+That's fine a couple of times, but as your explorations go on, you get tired of
+the repetition. Enter lscat/llcat. This simple script detects whether the
+passed in arguments are directories or files and uses the appropriate command
+based on what it finds.
